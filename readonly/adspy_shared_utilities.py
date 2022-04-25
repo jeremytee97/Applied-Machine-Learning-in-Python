@@ -1,4 +1,4 @@
-# version 1.0
+# version 1.1
 
 import numpy
 import pandas as pd
@@ -16,7 +16,7 @@ def load_crime_dataset():
     # Communities and Crime dataset for regression
     # https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime+Unnormalized
 
-    crime = pd.read_table('CommViolPredUnnormalizedData.txt', sep=',', na_values='?')
+    crime = pd.read_table('readonly/CommViolPredUnnormalizedData.txt', sep=',', na_values='?')
     # remove features with poor coverage or lower relevance, and keep ViolentCrimesPerPop target column
     columns_to_keep = [5, 6] + list(range(11,26)) + list(range(32, 103)) + [145]  
     crime = crime.ix[:,columns_to_keep].dropna()
@@ -169,8 +169,8 @@ def plot_class_regions_for_classifier(clf, X, y, X_test=None, y_test=None, title
     plt.show()
     
 def plot_fruit_knn(X, y, n_neighbors, weights):
-    X_mat = X[['height', 'width']].as_matrix()
-    y_mat = y.as_matrix()
+    X_mat = X[['height', 'width']].values
+    y_mat = y.values
 
     # Create color maps
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF','#AFAFAF'])
